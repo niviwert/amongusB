@@ -1,7 +1,8 @@
 import logging
 
 from sqlalchemy import create_engine
-from postgres_db import Base
+
+from postgres.postgres_db import Base
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 LOGGER = logging.getLogger(__name__)

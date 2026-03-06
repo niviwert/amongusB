@@ -18,9 +18,9 @@ class Status(enum.Enum) :
 
 
 class Bamba(Base):
-    __tablename__ = "bamba"
+    __tablename__ = "deployments"
 
-    id: Mapped[UUID] = mapped_column(default=uuid4(), primary_key=True)
+    id: Mapped[str] = mapped_column(String(100), primary_key=True)
     db_name: Mapped[str] = mapped_column(String(50))
     status: Mapped[Enum] = mapped_column(Enum(Status))
     username: Mapped[str] = mapped_column(String(50))
