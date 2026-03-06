@@ -20,7 +20,7 @@ def add_database(db_name: str, username: str):
 def get_database(id: str):
     stmt = select(Bamba).where(Bamba.id == id)
     db = session.scalar(stmt)
-    deployment_data = {"id": db.id, "db_name": db.db_name, "status": db.status, "creation_time": db.creation_time}
+    deployment_data = {"id": db.id, "db_name": db.db_name, "status": db.status.value, "creation_time": str(db.creation_time)}
     return deployment_data
 
 def get_deployment_username(id: str):
@@ -34,6 +34,13 @@ def update_db_name(deployment_id: str, dep: Dep):
     session.execute(stmt)
     session.commit()
     return deployment_id
+
+def update_db_status_deleted(deployment_id: str):
+    stmt = (update(Bamba).where(Bamba.id == deployment_id).values(status=Status.DELETED))
+    session.execute(stmt)
+    session.commit()
+
+
 
 
 
