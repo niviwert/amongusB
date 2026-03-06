@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from starlette import status
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, FileResponse
 
 from src.api.actions.mongodb import create_mongo_db, update_mongodb_name, delete_mongo_db
 from src.api.actions.postgres import get_database, get_deployment_username
@@ -18,7 +18,7 @@ def create_db(dep: Dep):
 
 @router.get("/deployments/{deployment_id}")
 def get_deployment(deployment_id: str):
-    return JSONResponse(status_code=200, content={"detail": "I got your details🦐🦐🦐", "deployment_details": get_database(deployment_id)})
+    return JSONResponse(status_code=200, content={"detail": "I got your details🦐🦐🦐 ","yeah": FileResponse("C:\Users\niviw\Desktop\matmonRemote\projects\amongusB\details.mp3", media_type="audio/mpeg"), "deployment_details": get_database(deployment_id)})
 
 @router.put("/deployments/{deployment_id}")
 def update_deployment(deployment_id: str, dep: Dep):
