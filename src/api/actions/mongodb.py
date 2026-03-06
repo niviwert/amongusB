@@ -4,6 +4,8 @@ from src.api.actions.postgres import add_database, get_database, update_db_name
 from src.api.modules.deployment import Dep
 
 myclient = pymongo.MongoClient("mongodb://nraboy:password1234@localhost:27017/")
+
+#todo add status code and response
 def create_mongo_db(db_name: str, username: str):
     mydb = myclient["matmon15-" + db_name]
     mycollection = mydb["my_collection"]
@@ -16,7 +18,7 @@ def create_mongo_db(db_name: str, username: str):
 
 def update_mongodb_name(deployment_id: str, dep: Dep):
     old_db_name = get_database(deployment_id).get("db_name")
-    old_db =myclient[old_db_name]
+    old_db = myclient[old_db_name]
     new_db = myclient["matmon15-" + dep.db_name]
     #("setParameter", {"db_name": dep.db_name})
     for col_name in old_db.list_collection_names():
@@ -35,3 +37,7 @@ def update_mongodb_name(deployment_id: str, dep: Dep):
     #db = db.dropDatabase();
     #myclient.admin.command("setParameter", {"db_name": db_name.db_name, "parameter": deployment_id})
     return update_db_name(deployment_id, dep)
+
+
+def delete_mongo_db(deployment_id: str, dep: Dep):
+    pass

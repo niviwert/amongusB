@@ -11,8 +11,9 @@ engine = create_engine('postgresql+psycopg2://{}:{}@{}/{}'.format('postgres', 'p
 Session = sessionmaker(bind=engine)
 session = Session()
 def add_database(db_name: str, username: str):
-    id= str(uuid.uuid4())
+    id = str(uuid.uuid4())
     session.add(Bamba(id=id, db_name="matmon15-" + db_name, status=Status.CREATED, username=username, creation_time=datetime.datetime.now()))
+    print(Bamba(id=id, db_name="matmon15-" + db_name, status=Status.CREATED, username=username, creation_time=datetime.datetime.now()))
     session.commit()
     return id
 
@@ -25,7 +26,7 @@ def get_database(id: str):
 
 
 def update_db_name(deployment_id: str, dep: Dep):
-    stmt = (update(Bamba).where(Bamba.id == deployment_id).values(db_name=dep.db_name))
+    stmt = (update(Bamba).where(Bamba.id == deployment_id).values(db_name="matmon15-" + dep.db_name))
     session.execute(stmt)
     session.commit()
     return deployment_id
