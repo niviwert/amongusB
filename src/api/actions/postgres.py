@@ -23,6 +23,10 @@ def get_database(id: str):
     deployment_data = {"id": db.id, "db_name": db.db_name, "status": db.status, "creation_time": db.creation_time}
     return deployment_data
 
+def get_deployment_username(id: str):
+    stmt = select(Bamba.username).where(Bamba.id == id)
+    result = session.scalar(stmt)
+    return str(result)
 
 
 def update_db_name(deployment_id: str, dep: Dep):
