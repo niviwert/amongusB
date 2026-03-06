@@ -31,7 +31,7 @@ def update_mongodb_name(deployment_id: str, dep: Dep):
             new_coll.insert_many(documents)
     print(old_db_name)
     print(dep.db_name)
-    #myclient.drop_database(old_db_name)
+    myclient.drop_database(old_db_name)
 
     #db = myclient.copyDatabase("old_db_name", dep.db_name, "localhost")
     #db = db.dropDatabase();
@@ -39,5 +39,5 @@ def update_mongodb_name(deployment_id: str, dep: Dep):
     return update_db_name(deployment_id, dep)
 
 
-def delete_mongo_db(deployment_id: str, dep: Dep):
+def delete_mongo_db(deployment_id: str, username: str):
     pass
